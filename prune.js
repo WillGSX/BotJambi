@@ -4,10 +4,21 @@ var Discord = require('discord.js');
 var iconv = require("iconv-lite");
 var request = require("request");
 var client = new Discord.Client();
+
+
+
 // confirm in console bot is working and ready.
 client.on("ready", function() {
 	console.log("New and updated PruneBot is online and ready to spit out AP requests!");
 });
+
+// Cipher ID  200065750487138304
+client.on("message", message=> {
+	if(message.author.id == 89869093930278912) {
+		return;
+	}
+});
+
 //*************************Delete bots own responses and the query strings***********************************//
 client.on("message", message => {
 	if(message.author.id == 269615816738209793 && message.channel.id != 269225116460777474) {
@@ -26,7 +37,7 @@ client.on("message", message => {
 	} else if (message.content.startsWith('!channelcheck')) {
 		message.reply(message.channel.id);
 	} else if (message.content.indexOf('Bot is working!') >= 0) {
-	} else if (message.content.indexOf('!help') >= 0) {
+	} else if (message.content == "!help") {
 		var name = message.author.username;
 		console.log(name + " used the help command!");
 		message.reply("use !AP Toonname to get Aerie Peak char artifact info.  Use !ap toonname servername to get info for toons on other servers");
@@ -81,7 +92,8 @@ client.on("message", message => {
 	if(message.content.startsWith("!dad") || message.content.startsWith("!daddy") || message.content.startsWith("!Dad") || message.content.startsWith("!Daddy")) {
 		console.log("Dad Joke!!");
 		var name = message.author.username;
-		console.log(name + " requested a Dad Joke!");
+		var id = message.author.id;
+		console.log(name + "ID: " + id + " requested a Dad Joke!");
 		request({
 			url: "https://icanhazdadjoke.com",
 			json: true,
@@ -104,14 +116,49 @@ client.on("message", message => {
 }
 });
 
+/*client.on("message", message => {
+	if(message.content.startsWith("!delete") && message.author.id == 89869093930278912 ) {
+			var num = message.content;
+			var fields = num.split(" ");
+			var key = parseInt(fields[1]);
+			console.log(key + " messages will be deleted.");
+			for (i = 0; i < 10; i++) {
+				message.delete(10);
+			};
+	}
+}); */
 
+client.on("message", message => {
+	if(message.content.startsWith("!delete") && message.author.id == 89869093930278912 || message.author.id == 89384212846637056 || message.author.id == 99182436507750400) {
+		var input = message.content;
+		var fields = input.split(" ");
+		var numb = fields[1];
+		var name = message.author.username;
+		var channel = message.channel.id;
+		var testy = message.channel.name;
+		var server = message.channel.guild.name;
+		console.log(testy);
+		if(!numb) {
+			var numb = 1;
+		} 
+		console.log(name + " is deleting " + numb + " messages from the " + testy + " channel on the " + server + " server.");
+		message.channel.fetchMessages({limit: numb})
+			.then(messages => {messages.deleteAll()})
+			.catch(console.error);
+} else if(message.content.startsWith("!delete") && message.author.id != 89869093930278912) {
+		message.reply("Sorry, you don't have permission to run this command."); 
+	}
+});
 //********************************************************************************AP BOT FUNCTION***************************************************************************************//
 // Total AP Query code
 client.on("message", message => {
 var data;
 if (message.content === "!AP") {
 		message.reply("Please enter your toon name");
-} else if (message.content.indexOf("!AP") >= 0 && message.author.id != 269615816738209793) {
+}	else if (message.content.startsWith('!AP') && message.content.match(/\s/g) === null && message.author.id != 269615816738209793) {
+		message.reply("Don't be dumb like Cipher, put spaces in your query. You can also type !help for more info");
+		console.log(message.author.id);
+} else if (message.content.startsWith("!AP") && message.author.id != 269615816738209793) {
   var input = message.content;
   var fields = input.split(" ");
   var name = iconv.decode(new Buffer(fields[1]), "ISO-8859-1");
@@ -137,6 +184,7 @@ request({
 					}
 				else if (key11 != -1 && namePlain == "Lateraius" || namePlain == "lateraius" || namePlain == "Jamb�" || namePlain == "jamb�") {
 					message.reply("Good day my master! You've earned " + value11.toLocaleString() + " Artifact Power! Your currently equipped artifact weapon is level " + value22 + "! Might I get you a warm beverage or a snack?");
+					console.log(message.author.id);
 				} else if  (key11 != -1 && namePlain == "Repans" || namePlain == "repans") {
 					message.reply("Ahh, THE warlock... Repans.  You've earned " + value11.toLocaleString() + " Artifact Power! Your currently equipped weapon is level " + value22 + "! You can basically solo Gul'dan now right?");
 				} else if (key11 != -1 && namePlain == "Rhyno" || namePlain == "rhyno") {
@@ -145,6 +193,9 @@ request({
 				} else if (key11 != -1 && namePlain == "Tattva" || namePlain == "tattva") {
 					message.reply("Hey bossman! You've earned " + value11.toLocaleString() + " Artifact Power and your weapon is level " + value22 + "!");
 					setTimeout(function(){ message.reply("Can I get a ready check?");}, 7500);
+				} else if  (key11 != -1 && namePlain == "Ciphervex" || namePlain == "ciphervex" || namePlain == "CipherVex") {
+					message.reply("HOLY SHIT ON A SHINGLE!  Cipher learned how to type instead of breaking me while I try to follow his faulty logic and terrible keyboardsmanship!  I'm so proud I'm going to let you know that you've earned " + value11.toLocaleString() + " Artifact Power and your weapon is level " + value22 + "!")
+					console.log(message.author.id);
 				} else if (key11 != -1 && value22 <= 15) {
         message.reply("Hey " + namePlain + "! You have earned a total of " + value11.toLocaleString() + " Artifact Power and your currently equipped artifact weapon is level " + value22 + "! Fun fact: Did you know you actually have to make an effort to get artifact power? You can do WQs, or basically anything... hell do you even play this character?!");
 			} else if (key11 != -1 && value22 <= 25) {
@@ -162,7 +213,7 @@ request({
 			}	else if (key11 != -1 && value22 <= 53) {
         message.reply("Hey " + namePlain + "! You have earned a total of " + value11.toLocaleString() + " Artifact Power and your currently equipped artifact weapon is level " + value22 + "! The amount of grind and work that you have put in this weapon almost makes me nauseous. Just think, in a short while you will be done....for now.");
 			}	else if (key11 != -1 && value22 == 54) {
-        message.reply("Hey " + namePlain + "! You have earned a total of " + value11.toLocaleString() + " Artifact Power and your currently equipped artifact weapon is level " + value22 + "! Holy shit. Go outside. For real. But GJ and GG! All your WoW friends can no be envious.");
+        message.reply("Hey " + namePlain + "! You have earned a total of " + value11.toLocaleString() + " Artifact Power and your currently equipped artifact weapon is level " + value22 + "! Holy shit. Go outside. For real. But GJ and GG! All your WoW friends can now be envious.");
 			}	else {
 				message.reply("There was an error with your query, likely either not level 110 or has no artifact weapon/AP");
 			}
@@ -177,7 +228,9 @@ client.on("message", message => {
 var data;
 if (message.content === "!ap") {
 		message.reply("Please enter character name and server");
-} else if (message.content.indexOf("!ap") >= 0 && message.author.id != 269615816738209793) {
+} 	else if (message.content.startsWith('!ap') && message.content.match(/\s/g) === null && message.author.id != 269615816738209793) {
+		message.reply("Don't be dumb like Cipher, put spaces in your query. You can also type !help for more info");
+}	else if (message.content.indexOf("!ap") >= 0 && message.author.id != 269615816738209793 && message.content.match(/\s/g) !== null) {
   var input = message.content;
   var fields = input.split(" ");
   var name = iconv.decode(new Buffer(fields[1]), "ISO-8859-1");
@@ -214,7 +267,8 @@ request({
         message.reply("Hey " + namePlain + "! You have earned a total of " + value11.toLocaleString() + " Artifact Power and your currently equipped artifact weapon is level " + value22 + "! You are becoming more machine than man...or woman. I would recommend getting some of those Gunnar optik yellow tint glasses that make you look 30 years older than you really are to help with the eye strain you must have from so many WQs and M+'s.");			}	else if (key11 != -1 && value22 <= 50) {
         message.reply("Hey " + namePlain + "! You have earned a total of " + value11.toLocaleString() + " Artifact Power and your currently equipped artifact weapon is level " + value22 + "! My GOD the grind is real.  I'm almost proud of your progress!");			}	else if (key11 != -1 && value22 <= 53) {
         message.reply("Hey " + namePlain + "! You have earned a total of " + value11.toLocaleString() + " Artifact Power and your currently equipped artifact weapon is level " + value22 + "! The amount of grind and work that you have put in this weapon almost makes me nauseous. Just think, in a short while you will be done....for now.");			}	else if (key11 != -1 && value22 == 54) {
-        message.reply("Hey " + namePlain + "! You have earned a total of " + value11.toLocaleString() + " Artifact Power and your currently equipped artifact weapon is level " + value22 + "! Holy shit. Go outside. For real. But GJ and GG! All your WoW friends can no be envious.");			}	else {
+        message.reply("Hey " + namePlain + "! You have earned a total of " + value11.toLocaleString() + " Artifact Power and your currently equipped artifact weapon is level " + value22 + "! Holy shit. Go outside. For real. But GJ and GG! All your WoW friends can now be envious.");
+		}	else {
 				message.reply("There was an error with your query, likely either not level 110 or has no artifact weapon/AP");			}
     } else {
 		message.reply("There was an error with your query, maybe a typo? remember realms with two names are hyphenated (ie: aerie-peak)");		}
