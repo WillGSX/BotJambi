@@ -1,3 +1,11 @@
+/////////////////////////////////////////////////////////////////////////////////////////
+//////////	BotJambi created by Jambî/Lateraius	////////////
+//////////					Aerie-Peak US						////////////
+//////////				  Convert to Mythic			            ////////////
+//////////			     		©2017							    ////////////
+//////////																	////////////
+////////////////////////////////////////////////////////////////////////////////////////
+
 //invite bot to servers using this link (must have manage server permission):   https://discordapp.com/oauth2/authorize?client_id=234115061411479552&scope=bot
 //set requirements and initate client
 var Discord = require('discord.js');
@@ -12,12 +20,6 @@ client.on("ready", function() {
 	console.log("New and updated PruneBot is online and ready to spit out AP requests!");
 });
 
-// Cipher ID  200065750487138304
-client.on("message", message=> {
-	if(message.author.id == 89869093930278912) {
-		return;
-	}
-});
 
 //*************************Delete bots own responses and the query strings***********************************//
 client.on("message", message => {
@@ -108,26 +110,14 @@ client.on("message", message => {
 });
 
 //**************************************************************************PRUNE BOT FUNCTION***************************************************************************//
-// auto-delete function for CtM Discord LFG channel only.
+// auto-delete function for CtM Discord LFG channel only.  add || message.channel.id == yourchannelidhere to include it in the delete function(auto deletes messages 20mins after sent)
 client.on("message", message => {
 	if (message.channel.id == 223246964957904896 || message.channel.id == 254699192654495745) {
 		console.log("This message will be deleted");
 		message.delete(1200000);
 }
 });
-
-/*client.on("message", message => {
-	if(message.content.startsWith("!delete") && message.author.id == 89869093930278912 ) {
-			var num = message.content;
-			var fields = num.split(" ");
-			var key = parseInt(fields[1]);
-			console.log(key + " messages will be deleted.");
-			for (i = 0; i < 10; i++) {
-				message.delete(10);
-			};
-	}
-}); */
-
+///////////////////////////////////////////////Mass message delete function, delete up to 100 messages with one command//////////////////////////////////////////////////////////////////
 client.on("message", message => {
 	if(message.content.startsWith("!delete") && message.author.id == 89869093930278912 || message.author.id == 89384212846637056 || message.author.id == 99182436507750400) {
 		var input = message.content;
@@ -314,7 +304,7 @@ request({
 
 
 
-
+//different bot account client ID's
 
 //client.login("MjYyMDQxNzQyMTMwMjgyNDk2.Cz9s5g.UHJ1TjQW34rUtsjML--z1jvYIMA");   //pruneTest client
 //client.login("MjM0MTE1MDYxNDExNDc5NTUy.CtnUQw.My73vWT2h6RbUCRj7KZUGgPGJIQ");    //prunebot client
