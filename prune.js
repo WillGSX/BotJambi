@@ -336,6 +336,6 @@ client.on("message", message => {
 
 //different bot account client ID's
 
-client.login("MjYyMDQxNzQyMTMwMjgyNDk2.Cz9s5g.UHJ1TjQW34rUtsjML--z1jvYIMA");   //pruneTest client
+//client.login("MjYyMDQxNzQyMTMwMjgyNDk2.Cz9s5g.UHJ1TjQW34rUtsjML--z1jvYIMA");   //pruneTest client
 //client.login("MjM0MTE1MDYxNDExNDc5NTUy.CtnUQw.My73vWT2h6RbUCRj7KZUGgPGJIQ");    //prunebot client
-//client.login("MjY5NjE1ODE2NzM4MjA5Nzkz.C1r61A.5j7e4NTiXl8-xlehXfJ6AHjH6vY");  //BotJambi login
+client.login("MjY5NjE1ODE2NzM4MjA5Nzkz.C1r61A.5j7e4NTiXl8-xlehXfJ6AHjH6vY");  //BotJambi login
