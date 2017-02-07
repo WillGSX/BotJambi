@@ -67,6 +67,24 @@ client.on("message", message => {
 	}
 });
 
+//***************************WOW Token Price Request*****************************//
+client.on("message", message => {
+	if(message.content.startsWith("!token") || message.content.startsWith("!Token")) {
+			var name = message.author.username;
+			console.log(name + " has requested a WoW token price quote.");
+			request({
+				url: "https://wowtoken.info/wowtoken.json",
+				json: true,
+			}, function (error, response, body) {
+				var token = body['update']['NA']['formatted']['buy'];
+				var updated = body['update']['NA']['formatted']['updated'];
+				message.reply("WoW Tokens are currently " + token + ".");
+				message.reply("Price was last updated at " + updated + ".");
+			}
+		);
+	}
+});
+
 //***************************Chuck Norris**************************//
 client.on("message", message => {
 	if(message.content.startsWith("!norris") || message.content.startsWith("!Norris")) {
@@ -318,6 +336,6 @@ client.on("message", message => {
 
 //different bot account client ID's
 
-//client.login("MjYyMDQxNzQyMTMwMjgyNDk2.Cz9s5g.UHJ1TjQW34rUtsjML--z1jvYIMA");   //pruneTest client
+client.login("MjYyMDQxNzQyMTMwMjgyNDk2.Cz9s5g.UHJ1TjQW34rUtsjML--z1jvYIMA");   //pruneTest client
 //client.login("MjM0MTE1MDYxNDExNDc5NTUy.CtnUQw.My73vWT2h6RbUCRj7KZUGgPGJIQ");    //prunebot client
-client.login("MjY5NjE1ODE2NzM4MjA5Nzkz.C1r61A.5j7e4NTiXl8-xlehXfJ6AHjH6vY");  //BotJambi login
+//client.login("MjY5NjE1ODE2NzM4MjA5Nzkz.C1r61A.5j7e4NTiXl8-xlehXfJ6AHjH6vY");  //BotJambi login
