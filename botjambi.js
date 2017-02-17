@@ -48,7 +48,7 @@ client.on("message", message => {
 		}, function (error, response, body) {
 				var fact = body;
 				console.log(fact);
-				message.reply(fact);
+				message.channel.send(fact);
 			}
 
 		);
@@ -63,8 +63,8 @@ client.on("message", message => {
 			}, function (error, response, body) {
 				var token = body['update']['NA']['formatted']['buy'];
 				var updated = body['update']['NA']['formatted']['updated'];
-				message.reply("WoW Tokens are currently " + token + ".");
-				message.reply("Price was last updated at " + updated + ".");
+				message.channel.send("WoW Tokens are currently " + token + ".");
+				message.channel.send("Price was last updated at " + updated + ".");
 			}
 		);
 	};
@@ -107,7 +107,7 @@ client.on("message", message => {
 		}, function (error, response, body) {
 				var fact = body['joke'];
 				console.log(fact);
-				message.reply(fact);
+				message.channel.send(fact);
 			}
 		);
 	};
@@ -125,7 +125,7 @@ client.on("message", message => {
 				var fact = body['value']['joke'];
 				var fact = fact.replace(/&quot;/g,'"');
 				console.log(fact);
-				message.reply(fact);
+				message.channel.send(fact);
 			}
 		);
 	};
@@ -185,9 +185,9 @@ client.on("message", message => {
 				"A Pandaren who cooks in the dark…must use a Shado-Pan.", "Pop star Adele plays a Mage…because she's always rolling in the deeps.", "Hunters take bad photographs…because they are always out of focus.", "A Pandaren’s favorite burger…is a Quarter Panda With Cheese.", "Tauren Poker players are known…for their Thunder Bluff.", "Never argue with a Tauren…It goes in one ear and out the udder.", "A Pandaren who cuts himself…has to use a Pandaid.", "A Mage who cannot fish…is considered a bad caster.", "A Hunter that wishes to skip work...Feigns Death in the family.", "The musician in Icecrown...is the Arthas formerly known as Prince","Good raiders smell bad...because they never wipe.", "When Horde set down a Feast…the hungriest raider is always a-goblin.", "Mage who watch fast paced action movie...shouldn't blink.", "Paladin who wishes to sleep on the clock...must lay on hands.", "Rogue who burp on vent for all to hear…must have mute too late.",	"Warrior with too many babies…need to spec Protection.", "Mage who eat too many donuts…is overpowdered.", "A druid who lights their farts...casts Moonfire.", "A crowded tram ride in Stormwind…smell different to Gnome.", "In Pandaria, to make an Egg Roll…push it.",
 				"A Druid going through their teenage years…experience Wild Growth."];
 			var rando = fortunes[Math.floor(Math.random() * fortunes.length)];
-			message.reply("Channeling the great Koltrane...");
-			setTimeout(function(){message.reply("Fortune Cookie Say...");}, 2000);
-			setTimeout(function(){ message.reply(rando);}, 4000);
+			message.channel.send("Channeling the great Koltrane...");
+			setTimeout(function(){message.channel.send("Fortune Cookie Say...");}, 2000);
+			setTimeout(function(){ message.channel.send(rando);}, 4000);
 	}
 });
 
