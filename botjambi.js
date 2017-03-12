@@ -55,6 +55,9 @@ client.on("message", message => {
 	};
 	
 	 if(message.content.startsWith("!token") || message.content.startsWith("!Token")) {
+			if (error) {
+				message.channel.send("It looks like wowtoken.info is down");
+			} else
 			var name = message.author.username;
 			console.log(name + " has requested a WoW token price quote.");
 			request({
