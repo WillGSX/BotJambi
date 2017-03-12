@@ -47,7 +47,7 @@ client.on("message", message => {
 
 		}, function (error, response, body) {
 				var fact = body;
-				console.log(fact);
+				console.log(fact);1
 				message.channel.send(fact);
 			}
 
@@ -55,10 +55,8 @@ client.on("message", message => {
 	};
 	
 	 if(message.content.startsWith("!token") || message.content.startsWith("!Token")) {
-			if (error) {
-				message.channel.send("It looks like wowtoken.info is down");
-			} else
-			var name = message.author.username;
+			message.reply("Wowtoken.info is currently down");
+			/*var name = message.author.username;
 			console.log(name + " has requested a WoW token price quote.");
 			request({
 				url: "https://wowtoken.info/wowtoken.json",
@@ -69,7 +67,7 @@ client.on("message", message => {
 				message.channel.send("WoW Tokens are currently " + token + ".");
 				message.channel.send("Price was last updated at " + updated + ".");
 			}
-		);
+		); */
 	};
 	
 	if(message.content.startsWith("!delete") && message.author.id == 89869093930278912) {
